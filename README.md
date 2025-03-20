@@ -1,16 +1,13 @@
 # spacex_rockets
 
-A new Flutter project.
+Sample project to show spacex rockets.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Approach
+Architecture: Clean Architecture with Test Driven Development
+State Management: Bloc
 
-A few resources to get you started if this is your first Flutter project:
+A single `Rocket` entity has been created for all the properties related to the rocket. This entity will be used to fill-in the data required in both the pages and cache these data once received from the api.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Trade-offs
+An alternative approach was to create two different entities `RocketOverview` for brief details that are required in the rocket list page and `RocketDetail` for the detailed information about the rocket, needed in the second page, but this would need two separate calls to the api; but as we can extract whole information from single api this approach might be an overkill.
