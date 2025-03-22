@@ -4,10 +4,11 @@
     "country": "India",
     "costPerLaunch": 100000,
     "description": "rocket description",
-    "diameterInMeter": 19.2,
+    "diameterInFeet": 19.2,
+    "isActive": true,
     "engineCount": 4,
     "flickerImages": ["https://flickerImages-test.com"],
-    "heightInMeter": 82.4,
+    "heightInFeet": 82.4,
     "successRatePercent": 99.2,
     "wikipediaLink": "https://example.com"
 }

@@ -2,12 +2,11 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:spacex_rockets/app/core/errors/exceptions.dart';
 import 'package:spacex_rockets/app/modules/rockets/data/models/rocket_model.dart';
-import 'package:spacex_rockets/app/modules/rockets/domain/entities/rocket.dart';
 import 'package:spacex_rockets/utils/urls.dart';
 
 abstract class RocketRemoteDataSource {
-  Future<List<Rocket>> getRockets();
-  Future<Rocket> getRocketById(String id);
+  Future<List<RocketModel>> getRockets();
+  Future<RocketModel> getRocketById(String id);
 }
 
 class RocketRemoteDataSourceImplementation implements RocketRemoteDataSource{
@@ -17,6 +16,7 @@ class RocketRemoteDataSourceImplementation implements RocketRemoteDataSource{
 
   @override
   Future<List<RocketModel>> getRockets() async{
+    print("LIST API CALLED");
     try {
       final response = await _client.get(
         Uri.https(
@@ -43,6 +43,7 @@ class RocketRemoteDataSourceImplementation implements RocketRemoteDataSource{
 
   @override
   Future<RocketModel> getRocketById(String id) async{
+    print("DETAIL API CALLED");
     try {
       final response = await _client.get(
         Uri.https(

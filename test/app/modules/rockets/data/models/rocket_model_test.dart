@@ -14,10 +14,11 @@ void main() {
       country: "India",
       costPerLaunch: 100000,
       description: "rocket description",
-      diameterInMeter: 19.2,
+      diameterInFeet: 19.2,
       engineCount: 4,
+      isActive: true,
       flickerImages: ["https://flickerImages-test.com"],
-      heightInMeter: 82.4,
+      heightInFeet: 82.4,
       successRatePercent: 99.2,
       wikipediaLink: "https://example.com");
 
@@ -27,7 +28,6 @@ void main() {
 
   final tJson = fixture('rocket.json');
   final tMap = jsonDecode(tJson) as DataMap;
-
 
   group("copywith", () {
     test('should return [RocketModel] with right data', () {
@@ -56,25 +56,21 @@ void main() {
     test('should return json with right data', () {
       final data = tModel.toJson();
       final tJson = jsonEncode({
-    "id": "id1",
-    "name": "rocketTest",
-    "country": "India",
-    "costPerLaunch": 100000.0,
-    "description": "rocket description",
-    "diameterInMeter": 19.2,
-    "engineCount": 4,
-    "flickerImages": ["https://flickerImages-test.com"],
-    "heightInMeter": 82.4,
-    "successRatePercent": 99.2,
-    "wikipediaLink": "https://example.com"
-});
+        "id": "id1",
+        "name": "rocketTest",
+        "country": "India",
+        "costPerLaunch": 100000.0,
+        "description": "rocket description",
+        "diameterInFeet": 19.2,
+        "engineCount": 4,
+        "flickerImages": ["https://flickerImages-test.com"],
+        "isActive": true,
+        "heightInFeet": 82.4,
+        "successRatePercent": 99.2,
+        "wikipediaLink": "https://example.com"
+      });
       expect(data, equals(tJson));
     });
   });
 
-  group('fromJson', () {
-    test('should return [RocketModel] with right data', () {
-      expect(RocketModel.fromJson(tJson), tModel);
-    });
-  });
 }

@@ -9,10 +9,11 @@ class RocketModel extends Rocket {
     required super.country,
     required super.costPerLaunch,
     required super.description,
-    required super.diameterInMeter,
+    required super.diameterInFeet,
     required super.engineCount,
     required super.flickerImages,
-    required super.heightInMeter,
+    required super.isActive,
+    required super.heightInFeet,
     required super.successRatePercent,
     required super.wikipediaLink,
   });
@@ -22,13 +23,14 @@ class RocketModel extends Rocket {
     String? name,
     String? country,
     int? engineCount,
+    bool? isActive,
     List<String>? flickerImages,
     double? costPerLaunch,
     double? successRatePercent,
     String? description,
     String? wikipediaLink,
-    double? heightInMeter,
-    double? diameterInMeter,
+    double? heightInFeet,
+    double? diameterInFeet,
   }) {
     return RocketModel(
         id: id ?? this.id,
@@ -36,10 +38,11 @@ class RocketModel extends Rocket {
         country: country ?? this.country,
         costPerLaunch: costPerLaunch ?? this.costPerLaunch,
         description: description ?? this.description,
-        diameterInMeter: diameterInMeter ?? this.diameterInMeter,
+        diameterInFeet: diameterInFeet ?? this.diameterInFeet,
         engineCount: engineCount ?? this.engineCount,
         flickerImages: flickerImages ?? this.flickerImages,
-        heightInMeter: heightInMeter ?? this.heightInMeter,
+        isActive: isActive ?? this.isActive,
+        heightInFeet: heightInFeet ?? this.heightInFeet,
         successRatePercent: successRatePercent ?? this.successRatePercent,
         wikipediaLink: wikipediaLink ?? this.wikipediaLink);
   }
@@ -51,10 +54,11 @@ class RocketModel extends Rocket {
       'country': country,
       'costPerLaunch': costPerLaunch,
       'description': description,
-      'diameterInMeter': diameterInMeter,
+      'diameterInFeet': diameterInFeet,
       'engineCount': engineCount,
       'flickerImages': flickerImages,
-      'heightInMeter': heightInMeter,
+      'isActive': isActive,
+      'heightInFeet': heightInFeet,
       'successRatePercent': successRatePercent,
       'wikipediaLink': wikipediaLink
     };
@@ -65,13 +69,31 @@ class RocketModel extends Rocket {
       id: map['id'] as String,
       name: map['name'] as String,
       country: map['country'] as String,
-      costPerLaunch: double.parse(map['costPerLaunch'].toString()),
+      costPerLaunch: double.tryParse(map['cost_per_launch'].toString()) ?? 0,
       description: map['description'] as String,
-      diameterInMeter: double.parse(map['diameterInMeter'].toString()),
+      diameterInFeet: double.tryParse(map['diameter']["feet"].toString()) ?? 0,
+      engineCount: int.parse(map['engines']["number"].toString()),
+      flickerImages: List<String>.from((map['flickr_images'] as List)),
+      isActive: map['active'] as bool,
+      heightInFeet: double.tryParse(map['height']["feet"].toString()) ?? 0,
+      successRatePercent: double.tryParse(map['success_rate_pct'].toString()) ?? 0,
+      wikipediaLink: map['wikipedia'] as String,
+    );
+  }
+
+  factory RocketModel.fromLocalMap(Map<String, dynamic> map) {
+    return RocketModel(
+      id: map['id'] as String,
+      name: map['name'] as String,
+      country: map['country'] as String,
+      costPerLaunch: double.tryParse(map['costPerLaunch'].toString()) ?? 0,
+      description: map['description'] as String,
+      diameterInFeet: double.tryParse(map['diameterInFeet'].toString()) ?? 0,
       engineCount: int.parse(map['engineCount'].toString()),
       flickerImages: List<String>.from((map['flickerImages'] as List)),
-      heightInMeter: double.parse(map['heightInMeter'].toString()),
-      successRatePercent: double.parse(map['successRatePercent'].toString()),
+      isActive: map['isActive'] as bool,
+      heightInFeet: double.tryParse(map['heightInFeet'].toString()) ?? 0,
+      successRatePercent: double.tryParse(map['successRatePercent'].toString()) ?? 0,
       wikipediaLink: map['wikipediaLink'] as String,
     );
   }
@@ -81,6 +103,9 @@ class RocketModel extends Rocket {
   factory RocketModel.fromJson(String source) =>
       RocketModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
+  factory RocketModel.fromLocalJson(String source) =>
+      RocketModel.fromLocalMap(json.decode(source) as Map<String, dynamic>);
+
   factory RocketModel.fromRocket(Rocket rocket) {
     return RocketModel(
       id: rocket.id,
@@ -88,10 +113,11 @@ class RocketModel extends Rocket {
       country: rocket.country,
       costPerLaunch: rocket.costPerLaunch,
       description: rocket.description,
-      diameterInMeter: rocket.diameterInMeter,
+      diameterInFeet: rocket.diameterInFeet,
       engineCount: rocket.engineCount,
       flickerImages: rocket.flickerImages,
-      heightInMeter: rocket.heightInMeter,
+      isActive: rocket.isActive,
+      heightInFeet: rocket.heightInFeet,
       successRatePercent: rocket.successRatePercent,
       wikipediaLink: rocket.wikipediaLink,
     );
@@ -104,10 +130,11 @@ class RocketModel extends Rocket {
         country: country,
         costPerLaunch: costPerLaunch,
         description: description,
-        diameterInMeter: diameterInMeter,
+        diameterInFeet: diameterInFeet,
         engineCount: engineCount,
         flickerImages: flickerImages,
-        heightInMeter: heightInMeter,
+        isActive: isActive,
+        heightInFeet: heightInFeet,
         successRatePercent: successRatePercent,
         wikipediaLink: wikipediaLink);
   }
